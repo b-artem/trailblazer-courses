@@ -1,5 +1,10 @@
 en:
-  employee_mailer:
+  user_mailer:
+    invite:
+      subject: Create your account
+      title: Dear User!
+      message: You’ve been invited to create your account.
+      link_text: To accept this invitation please click this link.
     reset_password:
       subject: Your reset password link
       title: Dear User!

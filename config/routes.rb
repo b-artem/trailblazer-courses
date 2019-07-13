@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   namespace :account do
     resource :password, only: :update
   end
+  resources :user_invitations, only: %i[create]
 end
