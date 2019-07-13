@@ -1,12 +1,13 @@
 en:
   errors:
-    unauthenticated: Authentication failed
-    pagination_overflow: is out of limits
-    self_removal: Cannot remove self
-    restore_password:
-      not_exists: User with such email doesn’t exist
     account:
       wrong_password: Wrong password
+    pagination_overflow: is out of limits
+    restore_password:
+      not_exists: User with such email doesn’t exist
+    self_removal: Cannot remove self
+    unauthenticated: Authentication failed
+    unique?: User with such email already exists
 
     rules:
       user_password:

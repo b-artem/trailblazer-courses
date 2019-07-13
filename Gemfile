@@ -14,7 +14,7 @@ gem 'sidekiq'
 # Trailblazer bundle
 gem 'dry-validation', '0.11.1'
 gem 'trailblazer-endpoint', github: 'trailblazer/trailblazer-endpoint'
-gem 'trailblazer-rails'
+gem 'trailblazer-rails', '~> 2.1', '>= 2.1.7'
 
 # Authentication
 gem 'bcrypt'
