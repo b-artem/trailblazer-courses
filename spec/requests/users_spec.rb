@@ -7,7 +7,7 @@ RSpec.describe 'Users', :dox, type: :request do
     include ApiDoc::Users::Index
 
     let(:params) { { page: page } }
-    let(:headers) { { Authorization: "{ \"user_id\": #{current_user.id} }" } }
+    let(:headers) { authorization_header(current_user) }
     let(:current_user) { create(:user, is_admin: is_admin) }
     let(:is_admin) { true }
     let(:page) { 2 }
@@ -65,10 +65,59 @@ RSpec.describe 'Users', :dox, type: :request do
     end
   end
 
+  describe 'POST #create' do
+    include ApiDoc::Users::Create
+
+    let(:user_invitation) { create(:user_invitation) }
+    let(:params) do
+      {
+        token: token,
+        first_name: first_name,
+        last_name: last_name,
+        password: password,
+        password_confirmation: password_confirmation
+      }
+    end
+    let(:token) { user_invitation.token }
+    let(:first_name) { FFaker::Name.first_name }
+    let(:last_name) { FFaker::Name.last_name }
+    let(:password) { 'MegaPassword0' }
+    let(:password_confirmation) { password }
+
+    before { post users_path, params: params }
+
+    describe 'Success' do
+      it 'creates User', :dox do
+        expect(response).to be_created
+        expect(response.body).to be_empty
+      end
+    end
+
+    describe 'Failure' do
+      context 'when invitation token is not valid' do
+        let(:token) { 'invalid' }
+
+        it 'renders errors' do
+          expect(response).to be_unprocessable
+          expect(response).to match_json_schema('errors')
+        end
+      end
+
+      context 'with invalid params' do
+        let(:first_name) { nil }
+
+        it 'renders errors' do
+          expect(response).to be_unprocessable
+          expect(response).to match_json_schema('errors')
+        end
+      end
+    end
+  end
+
   describe 'GET #destroy' do
     include ApiDoc::Users::Index
 
-    let(:headers) { { Authorization: "{ \"user_id\": #{current_user.id} }" } }
+    let(:headers) { authorization_header(current_user) }
     let(:current_user) { create(:user, is_admin: is_admin) }
     let(:is_admin) { true }
     let(:target_user) { create(:user) }

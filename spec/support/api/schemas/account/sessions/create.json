@@ -45,7 +45,7 @@
               "title": "The Csrf Schema",
               "default": "",
               "examples": [
-                "jhg34jhgjk34kjh+hlgH0dUF1+sdjgfasdgfguasgFvHYiCxrd7rBr3kzybjkgUIGUIG=="
+                "675sd/2jBQleo06L5qZrANq0hHz74DKpdKR+CCwby8mRB5bRQYdJRHLfj4p8Wu77mC1C285JT/VfcfhgHOHD6ng=="
               ],
               "pattern": "^(.*)$"
             },
@@ -55,7 +55,7 @@
               "title": "The Access Schema",
               "default": "",
               "examples": [
-                "eyzgzgbGciOzfgUzIzgiJ9.eyJleHAiOjE1NTUyNTI4OTEsInVzZXJfaWQiOjEyNDA4LCJ1aWQiOiJiZGIzNDgyNy1lY2Q2LTQ2NjctYmVkMi0wM2E0ZDI1MWM1MWEiLCJleHAiOjE1NTUyNTI4OTEsInJ1aWQiOiJmY2VkYTZkOS0zYjgwLTQ0ZjEtYmMwOS0wYjIyNzgwYzc2YTEifQ.DVHzJVC4r2vJi2C1UmTcPSbDd6P2KEVxtzkzdgksjew"
+                "sdghbGciOiJIUzI1NiJ9.eyJleHAiUsdfhGGMwOTUsInVzZXJfaWQiOjEyNDc3LCJ1aWQiOiIyODdlZjM1Ni0xNGZlLTQxM2YtOWZhYS0xZDZkYWIxYTExMjciLCJleHAiOjE1NTUyNTMwOTUsInJ1aWQiOiI2OGY5MjAxYS1hZTNlLTQxZDItODkxMi01YWM3M2ZlNjhlMGUifQ.2MtvWjyl_HbLE0M_o0ZujfzhfhzhUZAkCP1aILLgWI"
               ],
               "pattern": "^(.*)$"
             },
@@ -65,7 +65,7 @@
               "title": "The Access_expires_at Schema",
               "default": "",
               "examples": [
-                "2019-04-14T17:41:31.000+03:00"
+                "2019-04-14T17:44:55.000+03:00"
               ],
               "pattern": "^(.*)$"
             },
@@ -75,7 +75,7 @@
               "title": "The Refresh Schema",
               "default": "",
               "examples": [
-                "eyJhbGczfghUzI1NiJ9.eyJleHAiOjJHGJG8768sInVpZCI6ImZjZWdsfhGG5LTNiODAtNDRmMS1iYzA5LTBUIGgjgjkgimV4cCI6MTU1NTg1NDA5MX0.P-bK8LKBmdfhfhvJb9guZ3prF-34LKKKLhb8de-HtOtTYk"
+                "eyJhbuyfFJHJfgzI1NiJ9.eyJleHAiOjdfsgsUyNTMwOTUsInVpZCI6IjY4ZjkyMDJHFGJHFJHFTEyLTVhYzczZmU2OGUwZSIsImV4cCI6MTU1NTg1NDI5NX0.Q6lidXB_VZbrvgyI-hLDmpL8_Whe8YoB_HI0oDVqaVw"
               ],
               "pattern": "^(.*)$"
             },
@@ -85,7 +85,7 @@
               "title": "The Refresh_expires_at Schema",
               "default": "",
               "examples": [
-                "2019-04-21T16:41:31.000+03:00"
+                "2019-04-21T16:44:55.000+03:00"
               ],
               "pattern": "^(.*)$"
             }

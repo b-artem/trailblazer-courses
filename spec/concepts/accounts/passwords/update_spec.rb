@@ -1,19 +1,31 @@
 # frozen_string_literal: true
 
 RSpec.describe Accounts::Passwords::Operation::Update do
-  subject(:result) { described_class.call(params: params, current_user: current_user) }
+  subject(:result) { described_class.call(params: params, payload: payload, current_user: current_user) }
 
   let(:params) { {} }
 
   let(:old_password) { 'Password1!' }
   let(:current_user) { create(:user, password: old_password) }
+  let(:payload) { { 'user_id' => current_user.id } }
 
   describe 'Success' do
     let(:params) { { old_password: old_password, password: 'Password2@', password_confirmation: 'Password2@' } }
+    let(:token) { double(:auth_token) }
+
+    before do
+      allow(JWTSessions::Session).to receive_message_chain(:new, :login)
+        .with(payload: payload, namespace: "sessions-user-#{current_user.id}")
+        .with(no_args)
+        .and_return(token)
+      allow(JWTSessions::Session).to receive(:new)
+        .with(namespace: "sessions-user-#{current_user.id}")
+        .and_call_original
+    end
 
     it 'changes employee password' do
       expect { result }.to(change(current_user, :password_digest))
-      expect(result[:auth]).to eq({ user_id: current_user.id }.to_json)
+      expect(result[:auth]).to eq(token)
       expect(result).to be_success
     end
   end

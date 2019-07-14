@@ -35,7 +35,10 @@ module Accounts::Passwords::Operation
 
     def reissue_session(ctx, model:, **)
       # create a new session data to return to user
-      ctx[:auth] = { user_id: model.id }.to_json
+      ctx[:auth] = JWTSessions::Session.new(
+        payload: { user_id: model.id },
+        namespace: "sessions-user-#{model.id}"
+      ).login
     end
 
     def prepare_renderer(ctx, auth:, **)
