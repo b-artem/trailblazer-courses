@@ -5,6 +5,10 @@ class UsersController < AuthorizedController
     endpoint Users::Operation::Index, current_user: current_user
   end
 
+  def created
+    endpoint Users::Operation::Create
+  end
+
   def destroy
     endpoint Users::Operation::Destroy, current_user: current_user
   end

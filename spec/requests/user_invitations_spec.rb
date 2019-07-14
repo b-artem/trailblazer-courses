@@ -51,4 +51,34 @@ RSpec.describe 'UserInvitations', :dox, type: :request do
       end
     end
   end
+
+  describe 'GET #validate' do
+    include ApiDoc::UserInvitations::Validate
+
+    let(:user_invitation) { create(:user_invitation) }
+    let(:params) { { token: token } }
+    let(:token) { user_invitation.token }
+
+    before do
+      get user_invitaions_validate_path, params: params
+    end
+
+    describe 'Success' do
+      it 'returns success', :dox do
+        expect(response).to be_successful
+        expect(response.body).to be_empty
+      end
+    end
+
+    describe 'Failure' do
+      context 'when user invitation does not exist' do
+        let(:token) { FFaker::Lorem.characters(24) }
+
+        it 'renders errors' do
+          expect(response).to be_unprocessable
+          expect(response).to match_json_schema('errors')
+        end
+      end
+    end
+  end
 end

@@ -23,7 +23,7 @@ RSpec.describe Accounts::Passwords::Operation::Update do
       let(:errors) do
         {
           old_password: ['must be filled'],
-          password: ['must be filled', 'size cannot be less than 8']
+          password: ["Password can't be blank", 'Use a minimum password length of 6 or more characters']
         }
       end
 
@@ -65,7 +65,7 @@ RSpec.describe Accounts::Passwords::Operation::Update do
 
     context 'when password is too short' do
       let(:params) { { old_password: old_password, password: 'P2@', password_confirmation: 'P2@' } }
-      let(:errors) { { password: ['size cannot be less than 8'] } }
+      let(:errors) { { password: ['size cannot be less than 6'] } }
 
       it 'has validation errors' do
         expect(result['result.contract.default'].errors.messages).to match errors
