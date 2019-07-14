@@ -28,9 +28,10 @@ module Accounts::Passwords::Operation
       ctx['contract.default'].errors.add(:base, I18n.t('errors.account.wrong_password'))
     end
 
-    def flush_all_sessions_of_employee(_ctx, **)
-      # drop all user sessions here
-      true
+    def flush_all_sessions_of_employee(_ctx, payload:, **)
+      # drop all user sessions
+      session = JWTSessions::Session.new(namespace: "sessions-user-#{payload['user_id']}")
+      session.flush_namespaced
     end
 
     def reissue_session(ctx, model:, **)
