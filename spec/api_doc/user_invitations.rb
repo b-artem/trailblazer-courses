@@ -18,5 +18,9 @@ module ApiDoc
     document :create do
       action 'Create user invitation'
     end
+
+    document :validate do
+      action 'Validates invitation token'
+    end
   end
 end
