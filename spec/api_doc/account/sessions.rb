@@ -19,6 +19,10 @@ module ApiDoc
       document :create do
         action 'Create a user session'
       end
+
+      document :destroy do
+        action 'Destroy a user session'
+      end
     end
   end
 end
