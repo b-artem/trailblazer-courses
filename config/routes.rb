@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :reset_password, only: %i[show create update]
   namespace :account do
     resource :password, only: :update
+    resource :session, only: %i[create]
   end
   resources :user_invitations, only: %i[create]
   get 'user_invitaions/validate', to: 'user_invitations#validate'

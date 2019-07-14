@@ -9,7 +9,7 @@ RSpec.describe 'UserInvitations', :dox, type: :request do
     let(:current_user) { create(:user, is_admin: is_admin) }
     let(:is_admin) { true }
     let(:params) { { email: FFaker::Internet.unique.email } }
-    let(:headers) { { Authorization: { user_id: current_user.id }.to_json } }
+    let(:headers) { authorization_header(current_user) }
 
     before do
       post user_invitations_path, params: params, headers: headers

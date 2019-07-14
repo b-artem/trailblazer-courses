@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
-class UsersController < AuthorizedController
+class UsersController < ApplicationController
+  include Authentication
+
+  before_action :authorize_access_request!, except: :create
+
   def index
     endpoint Users::Operation::Index, current_user: current_user
   end
 
-  def created
+  def create
     endpoint Users::Operation::Create
   end
 

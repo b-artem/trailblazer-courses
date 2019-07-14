@@ -8,6 +8,8 @@ en:
     restore_password:
       not_exists: User with such email doesn’t exist
     self_removal: Cannot remove self
+    session:
+      invalid: Email or password is incorrect
     unauthenticated: Authentication failed
     unique?: User with such email already exists
 
@@ -27,3 +29,10 @@ en:
             unique?: User with such email already exists
       user_password:
         eql?: must match password
+      user_session:
+        rules:
+          email:
+            filled?: Email can't be blank
+          password:
+            filled?: Password can't be blank
+            min_size?: Use a minimum password length of 6 or more characters
