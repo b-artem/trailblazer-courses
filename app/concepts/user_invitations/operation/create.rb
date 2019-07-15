@@ -15,7 +15,7 @@ module UserInvitations::Operation
     step :send_invitation_email
 
     def add_invitation_token(_ctx, model:, **)
-      model.token = SecureRandom.base58(Constants::Shared::INVITATION_TOKEN_LENGTH)
+      model.regenerate_token
     end
 
     def send_invitation_email(_ctx, model:, **)

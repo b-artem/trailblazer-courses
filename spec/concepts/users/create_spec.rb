@@ -3,7 +3,7 @@
 RSpec.describe Users::Operation::Create do
   subject(:result) { described_class.call(params: params) }
 
-  let(:user_invitation) { create(:user_invitation) }
+  let!(:user_invitation) { create(:user_invitation) }
   let(:params) do
     {
       token: token,
@@ -26,6 +26,7 @@ RSpec.describe Users::Operation::Create do
     end
 
     it 'creates a user' do
+      expect { result }.to change(User, :count).by(1)
       expect(result[:model]).to be_instance_of(User)
       expect(result[:model]).to be_persisted
       expect(result[:model].email).to eq(user_invitation.email)
@@ -33,9 +34,8 @@ RSpec.describe Users::Operation::Create do
       expect(result[:model].last_name).to eq(last_name)
     end
 
-    it 'deletes user invitation' do
-      result
-      expect(UserInvitation.count).to eq(0)
+    it 'deletes a user invitation' do
+      expect { result }.to change(UserInvitation, :count).by(-1)
     end
   end
 

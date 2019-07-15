@@ -29,16 +29,16 @@ module Accounts::Passwords::Operation
     end
 
     def flush_all_sessions_of_employee(_ctx, payload:, **)
-      # drop all user sessions
-      session = JWTSessions::Session.new(namespace: "sessions-user-#{payload['user_id']}")
+      session = JWTSessions::Session.new(
+        namespace: "#{Constants::Shared::JWT_SESSIONS_NAMESPACE}#{payload['user_id']}"
+      )
       session.flush_namespaced
     end
 
     def reissue_session(ctx, model:, **)
-      # create a new session data to return to user
       ctx[:auth] = JWTSessions::Session.new(
         payload: { user_id: model.id },
-        namespace: "sessions-user-#{model.id}"
+        namespace: "#{Constants::Shared::JWT_SESSIONS_NAMESPACE}#{model.id}"
       ).login
     end
 

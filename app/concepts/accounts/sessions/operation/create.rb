@@ -25,7 +25,7 @@ module Accounts::Sessions::Operation
     def login(ctx, model:, **)
       ctx[:auth] = JWTSessions::Session.new(
         payload: { user_id: model.id },
-        namespace: "sessions-user-#{model.id}"
+        namespace: "#{Constants::Shared::JWT_SESSIONS_NAMESPACE}#{model.id}"
       ).login
     end
 

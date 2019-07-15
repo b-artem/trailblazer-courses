@@ -15,11 +15,11 @@ RSpec.describe Accounts::Passwords::Operation::Update do
 
     before do
       allow(JWTSessions::Session).to receive_message_chain(:new, :login)
-        .with(payload: payload, namespace: "sessions-user-#{current_user.id}")
+        .with(payload: payload, namespace: "#{Constants::Shared::JWT_SESSIONS_NAMESPACE}#{current_user.id}")
         .with(no_args)
         .and_return(token)
       allow(JWTSessions::Session).to receive(:new)
-        .with(namespace: "sessions-user-#{current_user.id}")
+        .with(namespace: "#{Constants::Shared::JWT_SESSIONS_NAMESPACE}#{current_user.id}")
         .and_call_original
     end
 

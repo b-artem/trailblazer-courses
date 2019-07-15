@@ -2,6 +2,7 @@
 
 module Users::Operation
   class Create < Trailblazer::Operation
+    step :find_invitation
     step :token_valid?
     fail :invalid_token
 
@@ -13,20 +14,24 @@ module Users::Operation
 
     step :destroy_invitation
 
-    def token_valid?(_ctx, params:, **)
-      UserInvitation.where(token: params[:token]).exists?
+    def find_invitation(ctx, params:, **)
+      ctx[:invitation] = UserInvitation.find_by(token: params[:token])
+    end
+
+    def token_valid?(ctx, **)
+      ctx[:invitation]
     end
 
     def invalid_token(ctx, **)
       ctx[:errors] = { token: [I18n.t('errors.invalid_invitation_token')] }
     end
 
-    def add_email(_ctx, params:, **)
-      params[:email] = UserInvitation.find_by(token: params[:token]).email
+    def add_email(ctx, params:, **)
+      params[:email] = ctx[:invitation].email
     end
 
-    def destroy_invitation(_ctx, params:, **)
-      UserInvitation.find_by(token: params[:token]).destroy
+    def destroy_invitation(ctx, **)
+      ctx[:invitation].destroy
     end
   end
 end

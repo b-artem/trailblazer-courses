@@ -6,5 +6,6 @@ module Constants
     PASSWORD_REGEX = %r{(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!\$%&,\(\)\*\+-\.\/;:<=>?\[\\\]\^_{|}~#"@]+}i.freeze
     PASSWORD_MIN_LENGTH = 6
     INVITATION_TOKEN_LENGTH = 24
+    JWT_SESSIONS_NAMESPACE = 'sessions-user-'
   end
 end

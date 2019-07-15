@@ -25,8 +25,7 @@ RSpec.describe UserInvitations::Operation::Create do
       end
 
       it 'sends invitation email' do
-        allow(SecureRandom).to receive(:base58)
-          .with(Constants::Shared::INVITATION_TOKEN_LENGTH)
+        allow_any_instance_of(UserInvitation).to receive(:regenerate_token)
           .and_return('fake_token')
         expect(UserMailer).to receive_message_chain(:invite, :deliver_later)
           .with(params[:email], 'fake_token').with(no_args)
