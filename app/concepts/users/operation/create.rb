@@ -3,7 +3,6 @@
 module Users::Operation
   class Create < Trailblazer::Operation
     step :find_invitation
-    step :token_valid?
     fail :invalid_token
 
     step Model(User, :new)
@@ -16,10 +15,6 @@ module Users::Operation
 
     def find_invitation(ctx, params:, **)
       ctx[:invitation] = UserInvitation.find_by(token: params[:token])
-    end
-
-    def token_valid?(ctx, **)
-      ctx[:invitation]
     end
 
     def invalid_token(ctx, **)
