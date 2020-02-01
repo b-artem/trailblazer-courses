@@ -4,6 +4,7 @@
 
 require 'simplecov'
 require 'simplecov-lcov'
+require 'support/helpers/authorization_helper'
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
@@ -60,6 +61,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.include Helpers
   # Sync FFaker random values with Rspec seed option (to capture random failing tests).
   config.before(:all) { FFaker::Random.seed = config.seed }
   config.before { FFaker::Random.reset! }

@@ -1,13 +1,38 @@
 en:
   errors:
-    unauthenticated: Authentication failed
-    pagination_overflow: is out of limits
-    self_removal: Cannot remove self
-    restore_password:
-      not_exists: User with such email doesn’t exist
     account:
       wrong_password: Wrong password
+    exists?: That user invitation doesn't exist
+    invalid_invitation_token: Invalid invitation token
+    pagination_overflow: is out of limits
+    restore_password:
+      not_exists: User with such email doesn’t exist
+    self_removal: Cannot remove self
+    session:
+      invalid: Email or password is incorrect
+    unauthenticated: Authentication failed
+    unique?: User with such email already exists
 
     rules:
+      user_create:
+        rules:
+          first_name:
+            filled?: First Name can't be blank
+          last_name:
+            filled?: Last Name can't be blank
+          password:
+            filled?: Password can't be blank
+            min_size?: Use a minimum password length of 6 or more characters
+          password_confirmation:
+            eql?: Password and password confirmation do not match
+          email:
+            unique?: User with such email already exists
       user_password:
         eql?: must match password
+      user_session:
+        rules:
+          email:
+            filled?: Email can't be blank
+          password:
+            filled?: Password can't be blank
+            min_size?: Use a minimum password length of 6 or more characters

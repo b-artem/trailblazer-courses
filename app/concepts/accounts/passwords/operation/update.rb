@@ -28,14 +28,18 @@ module Accounts::Passwords::Operation
       ctx['contract.default'].errors.add(:base, I18n.t('errors.account.wrong_password'))
     end
 
-    def flush_all_sessions_of_employee(_ctx, **)
-      # drop all user sessions here
-      true
+    def flush_all_sessions_of_employee(_ctx, payload:, **)
+      session = JWTSessions::Session.new(
+        namespace: "#{Constants::Shared::JWT_SESSIONS_NAMESPACE}#{payload['user_id']}"
+      )
+      session.flush_namespaced
     end
 
     def reissue_session(ctx, model:, **)
-      # create a new session data to return to user
-      ctx[:auth] = { user_id: model.id }.to_json
+      ctx[:auth] = JWTSessions::Session.new(
+        payload: { user_id: model.id },
+        namespace: "#{Constants::Shared::JWT_SESSIONS_NAMESPACE}#{model.id}"
+      ).login
     end
 
     def prepare_renderer(ctx, auth:, **)
